@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>JanusTida</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\Tida.Geometry\Tida.Geometry\Tida.Geometry\Tida.Geometry.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
