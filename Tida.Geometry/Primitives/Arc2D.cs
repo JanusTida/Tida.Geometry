@@ -51,13 +51,13 @@ namespace Tida.Geometry.Primitives {
             set => SetFreezableProperty(ref _startAngle,value);
         }
 
-        private double _endAngle;
+        private double _angle;
         /// <summary>
-        /// 终止角度(弧度);
+        /// 角度(逆时针计算);
         /// </summary>
         public double EndAngle {
-            get => _endAngle;
-            set => SetFreezableProperty(ref _endAngle, value);
+            get => _angle;
+            set => SetFreezableProperty(ref _angle, value);
         }
 
 
