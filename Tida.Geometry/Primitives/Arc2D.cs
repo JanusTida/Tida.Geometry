@@ -55,7 +55,7 @@ namespace Tida.Geometry.Primitives {
         /// <summary>
         /// 角度(逆时针计算);
         /// </summary>
-        public double EndAngle {
+        public double Angle {
             get => _angle;
             set => SetFreezableProperty(ref _angle, value);
         }
