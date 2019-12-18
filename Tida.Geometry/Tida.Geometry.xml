@@ -1,0 +1,3923 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tida.Geometry</name>
+    </assembly>
+    <members>
+        <member name="T:Tida.Geometry.Alternation.CoordinateAlgorithm">
+            <summary>
+            当前类的主要用途：将空间中任意一个面，转换到XY平面上
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.CoordinateAlgorithm.line3ds">
+            <summary>
+            要转换的三维线集合
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.CoordinateAlgorithm.localPosition">
+            <summary>
+            当前的本地坐标
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.CoordinateAlgorithm.CurrentMatrix4">
+            <summary>
+            当前的转换矩阵
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.CoordinateAlgorithm.InversetMatrix4">
+            <summary>
+            当前的逆矩阵
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.#ctor(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.#ctor(Tida.Geometry.Primitives.Face)">
+            <summary>
+            构造函数，初始化当前平面
+            </summary>
+            <param name="face"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.TransformXY">
+            <summary>
+            将当前平面转化XY平面上，返回转换矩阵
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.TransformXY(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+             将当前平面转化XY平面上，返回转换矩阵
+            </summary>
+            <param name="origin">指定原点</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.Transform(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            转换到任意坐标系,返回转换矩阵
+            </summary>
+            <param name="origin">表示三维转换的原点</param>
+            <param name="localAxisX">要转换的X轴向量</param>
+            <param name="localaxisY">要转换的Y轴向量</param>
+            <param name="localaxisZ">要转换的Z轴向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.Transform(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            通过指定的矩阵进行转换
+            </summary>
+            <param name="m4">指定的矩阵</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.Transform(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            通过指定的矩阵进行转换
+            </summary>
+            <param name="m4">指定的矩阵</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.TransformLines(Tida.Geometry.Alternation.Matrix4,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            坐标系转换
+            </summary>
+            <param name="transMatrix">转换矩阵</param>
+            <param name="line3Ds">待转换的线</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.TransformDirection(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            转换向量
+            </summary>
+            <param name="transMatrix"></param>
+            <param name="direction">方向向量</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.Transform(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            通过指定的矩阵进行转换
+            </summary>
+            <param name="m4">指定的矩阵</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.CoordinateAlgorithm.UnTransform">
+            <summary>
+            反向转换当前矩阵信息
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.Matrix.Columns">
+            ÊôÐÔ: ¾ØÕóÁÐÊý
+        </member>
+        <member name="P:Tida.Geometry.Alternation.Matrix.Rows">
+            ÊôÐÔ: ¾ØÕóÐÐÊý
+        </member>
+        <member name="P:Tida.Geometry.Alternation.Matrix.Item(System.Int32,System.Int32)">
+            Ë÷ÒýÆ÷: ·ÃÎÊ¾ØÕóÔªËØ
+            @param row - ÔªËØµÄÐÐ
+            @param col - ÔªËØµÄÁÐ
+        </member>
+        <member name="P:Tida.Geometry.Alternation.Matrix.Eps">
+            ÊôÐÔ: Eps
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.#ctor">
+            »ù±¾¹¹Ôìº¯Êý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.#ctor(System.Int32,System.Int32)">
+            Ö¸¶¨ÐÐÁÐ¹¹Ôìº¯Êý
+            
+            @param nRows - Ö¸¶¨µÄ¾ØÕóÐÐÊý
+            @param nCols - Ö¸¶¨µÄ¾ØÕóÁÐÊý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.#ctor(System.Double[0:,0:])">
+            Ö¸¶¨Öµ¹¹Ôìº¯Êý
+            
+            @param value - ¶þÎ¬Êý×é£¬´æ´¢¾ØÕó¸÷ÔªËØµÄÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.#ctor(System.Int32,System.Int32,System.Double[])">
+            Ö¸¶¨Öµ¹¹Ôìº¯Êý
+            
+            @param nRows - Ö¸¶¨µÄ¾ØÕóÐÐÊý
+            @param nCols - Ö¸¶¨µÄ¾ØÕóÁÐÊý
+            @param value - Ò»Î¬Êý×é£¬³¤¶ÈÎªnRows*nCols£¬´æ´¢¾ØÕó¸÷ÔªËØµÄÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.#ctor(System.Int32)">
+            ·½Õó¹¹Ôìº¯Êý
+            
+            @param nSize - ·½ÕóÐÐÁÐÊý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.#ctor(System.Int32,System.Double[])">
+            ·½Õó¹¹Ôìº¯Êý
+            
+            @param nSize - ·½ÕóÐÐÁÐÊý
+            @param value - Ò»Î¬Êý×é£¬³¤¶ÈÎªnRows*nRows£¬´æ´¢·½Õó¸÷ÔªËØµÄÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.#ctor(Tida.Geometry.Alternation.Matrix)">
+            ¿½±´¹¹Ôìº¯Êý
+            
+            @param other - Ô´¾ØÕó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Init(System.Int32,System.Int32)">
+            ³õÊ¼»¯º¯Êý
+            
+            @param nRows - Ö¸¶¨µÄ¾ØÕóÐÐÊý
+            @param nCols - Ö¸¶¨µÄ¾ØÕóÁÐÊý
+            @return bool, ³É¹¦·µ»Øtrue, ·ñÔò·µ»Øfalse
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.SetEps(System.Double)">
+            ÉèÖÃ¾ØÕóÔËËãµÄ¾«¶È
+            
+            @param newEps - ÐÂµÄ¾«¶ÈÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetEps">
+            È¡¾ØÕóµÄ¾«¶ÈÖµ
+            
+            @return doubleÐÍ£¬¾ØÕóµÄ¾«¶ÈÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.op_Addition(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix)">
+            ÖØÔØ + ÔËËã·û
+            
+            @return Matrix¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.op_Subtraction(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix)">
+            ÖØÔØ - ÔËËã·û
+            
+            @return Matrix¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.op_Multiply(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix)">
+            ÖØÔØ * ÔËËã·û
+            
+            @return Matrix¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.op_Implicit(Tida.Geometry.Alternation.Matrix)~System.Double[]">
+            ÖØÔØ double[] ÔËËã·û
+            
+            @return double[]¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.MakeUnitMatrix(System.Int32)">
+            ½«·½Õó³õÊ¼»¯Îªµ¥Î»¾ØÕó
+            
+            @param nSize - ·½ÕóÐÐÁÐÊý
+            @return bool ÐÍ£¬³õÊ¼»¯ÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ToString">
+            ½«¾ØÕó¸÷ÔªËØµÄÖµ×ª»¯Îª×Ö·û´®, ÔªËØÖ®¼äµÄ·Ö¸ô·ûÎª",", ÐÐÓëÐÐÖ®¼äÓÐ»Ø³µ»»ÐÐ·û
+            @return string ÐÍ£¬×ª»»µÃµ½µÄ×Ö·û´®
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ToString(System.String,System.Boolean)">
+            ½«¾ØÕó¸÷ÔªËØµÄÖµ×ª»¯Îª×Ö·û´®
+            
+            @param sDelim - ÔªËØÖ®¼äµÄ·Ö¸ô·û
+            @param bLineBreak - ÐÐÓëÐÐÖ®¼äÊÇ·ñÓÐ»Ø³µ»»ÐÐ·û
+            @return string ÐÍ£¬×ª»»µÃµ½µÄ×Ö·û´®
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ToStringRow(System.Int32,System.String)">
+            ½«¾ØÕóÖ¸¶¨ÐÐÖÐ¸÷ÔªËØµÄÖµ×ª»¯Îª×Ö·û´®
+            
+            @param nRow - Ö¸¶¨µÄ¾ØÕóÐÐ£¬nRow = 0±íÊ¾µÚÒ»ÐÐ
+            @param sDelim - ÔªËØÖ®¼äµÄ·Ö¸ô·û
+            @return string ÐÍ£¬×ª»»µÃµ½µÄ×Ö·û´®
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ToStringCol(System.Int32,System.String)">
+            ½«¾ØÕóÖ¸¶¨ÁÐÖÐ¸÷ÔªËØµÄÖµ×ª»¯Îª×Ö·û´®
+            
+            @param nCol - Ö¸¶¨µÄ¾ØÕóÐÐ£¬nCol = 0±íÊ¾µÚÒ»ÁÐ
+            @param sDelim - ÔªËØÖ®¼äµÄ·Ö¸ô·û
+            @return string ÐÍ£¬×ª»»µÃµ½µÄ×Ö·û´®
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.SetData(System.Double[])">
+             ÉèÖÃ¾ØÕó¸÷ÔªËØµÄÖµ
+             
+             @param value - Ò»Î¬Êý×é£¬³¤¶ÈÎªnumColumns*numRows£¬´æ´¢
+            	              ¾ØÕó¸÷ÔªËØµÄÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.SetElement(System.Int32,System.Int32,System.Double)">
+            ÉèÖÃÖ¸¶¨ÔªËØµÄÖµ
+            
+            @param nRow - ÔªËØµÄÐÐ
+            @param nCol - ÔªËØµÄÁÐ
+            @param value - Ö¸¶¨ÔªËØµÄÖµ
+            @return bool ÐÍ£¬ËµÃ÷ÉèÖÃÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetElement(System.Int32,System.Int32)">
+            »ñÈ¡Ö¸¶¨ÔªËØµÄÖµ
+            
+            @param nRow - ÔªËØµÄÐÐ
+            @param nCol - ÔªËØµÄÁÐ
+            @return double ÐÍ£¬Ö¸¶¨ÔªËØµÄÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetNumColumns">
+            »ñÈ¡¾ØÕóµÄÁÐÊý
+            
+            @return int ÐÍ£¬¾ØÕóµÄÁÐÊý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetNumRows">
+            »ñÈ¡¾ØÕóµÄÐÐÊý
+            @return int ÐÍ£¬¾ØÕóµÄÐÐÊý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetData">
+            »ñÈ¡¾ØÕóµÄÊý¾Ý
+            
+            @return doubleÐÍÊý×é£¬Ö¸Ïò¾ØÕó¸÷ÔªËØµÄÊý¾Ý»º³åÇø
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetRowVector(System.Int32,System.Double[])">
+            »ñÈ¡Ö¸¶¨ÐÐµÄÏòÁ¿
+            
+            @param nRow - ÏòÁ¿ËùÔÚµÄÐÐ
+            @param pVector - Ö¸ÏòÏòÁ¿ÖÐ¸÷ÔªËØµÄ»º³åÇø
+            @return int ÐÍ£¬ÏòÁ¿ÖÐÔªËØµÄ¸öÊý£¬¼´¾ØÕóµÄÁÐÊý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetColVector(System.Int32,System.Double[])">
+            »ñÈ¡Ö¸¶¨ÁÐµÄÏòÁ¿
+            
+            @param nCol - ÏòÁ¿ËùÔÚµÄÁÐ
+            @param pVector - Ö¸ÏòÏòÁ¿ÖÐ¸÷ÔªËØµÄ»º³åÇø
+            @return int ÐÍ£¬ÏòÁ¿ÖÐÔªËØµÄ¸öÊý£¬¼´¾ØÕóµÄÐÐÊý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.SetValue(Tida.Geometry.Alternation.Matrix)">
+            ¸ø¾ØÕó¸³Öµ
+            
+            @param other - ÓÃÓÚ¸ø¾ØÕó¸³ÖµµÄÔ´¾ØÕó
+            @return MatrixÐÍ£¬ÕóÓëotherÏàµÈ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Equals(System.Object)">
+            ÅÐ¶Ï¾ØÕó·ñÏàµÈ
+            
+            @param other - ÓÃÓÚ±È½ÏµÄ¾ØÕó
+            @return bool ÐÍ£¬Á½¸ö¾ØÕóÏàµÈÔòÎªtrue£¬·ñÔòÎªfalse
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.GetHashCode">
+            ÒòÎªÖØÐ´ÁËEquals£¬Òò´Ë±ØÐëÖØÐ´GetHashCode
+            
+            @return intÐÍ£¬·µ»Ø¸´Êý¶ÔÏóÉ¢ÁÐÂë
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Add(Tida.Geometry.Alternation.Matrix)">
+            ÊµÏÖ¾ØÕóµÄ¼Ó·¨
+            
+            @param other - ÓëÖ¸¶¨¾ØÕóÏà¼ÓµÄ¾ØÕó
+            @return MatrixÐÍ£¬Ö¸¶¨¾ØÕóÓëotherÏà¼ÓÖ®ºÍ
+            @Èç¹û¾ØÕóµÄÐÐ/ÁÐÊý²»Æ¥Åä£¬Ôò»áÅ×³öÒì³£
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Subtract(Tida.Geometry.Alternation.Matrix)">
+            ÊµÏÖ¾ØÕóµÄ¼õ·¨
+            
+            @param other - ÓëÖ¸¶¨¾ØÕóÏà¼õµÄ¾ØÕó
+            @return MatrixÐÍ£¬Ö¸¶¨¾ØÕóÓëotherÏà¼õÖ®²î
+            @Èç¹û¾ØÕóµÄÐÐ/ÁÐÊý²»Æ¥Åä£¬Ôò»áÅ×³öÒì³£
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Multiply(System.Double)">
+            ÊµÏÖ¾ØÕóµÄÊý³Ë
+            
+            @param value - ÓëÖ¸¶¨¾ØÕóÏà³ËµÄÊµÊý
+            @return MatrixÐÍ£¬Ö¸¶¨¾ØÕóÓëvalueÏà³ËÖ®»ý
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Multiply(Tida.Geometry.Alternation.Matrix)">
+            ÊµÏÖ¾ØÕóµÄ³Ë·¨
+            
+            @param other - ÓëÖ¸¶¨¾ØÕóÏà³ËµÄ¾ØÕó
+            @return MatrixÐÍ£¬Ö¸¶¨¾ØÕóÓëotherÏà³ËÖ®»ý
+            @Èç¹û¾ØÕóµÄÐÐ/ÁÐÊý²»Æ¥Åä£¬Ôò»áÅ×³öÒì³£
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Multiply(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix)">
+            ¸´¾ØÕó£¨ÔªËØÖÐº¬ÓÐ¸´ÊýµÄ¾ØÕó£©µÄ³Ë·¨
+            
+            @param AR - ×ó±ß¸´¾ØÕóµÄÊµ²¿¾ØÕó
+            @param AI - ×ó±ß¸´¾ØÕóµÄÐé²¿¾ØÕó
+            @param BR - ÓÒ±ß¸´¾ØÕóµÄÊµ²¿¾ØÕó
+            @param BI - ÓÒ±ß¸´¾ØÕóµÄÐé²¿¾ØÕó
+            @param CR - ³Ë»ý¸´¾ØÕóµÄÊµ²¿¾ØÕó
+            @param CI - ³Ë»ý¸´¾ØÕóµÄÐé²¿¾ØÕó
+            @return boolÐÍ£¬¸´¾ØÕó³Ë·¨ÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.Transpose">
+            ¾ØÕóµÄ×ªÖÃ
+            
+            @return MatrixÐÍ£¬Ö¸¶¨¾ØÕó×ªÖÃ¾ØÕó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.InvertGaussJordan">
+            Êµ¾ØÕóÇóÄæµÄÈ«Ñ¡Ö÷Ôª¸ßË¹£­Ô¼µ±·¨
+            
+            @return boolÐÍ£¬ÇóÄæÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.InvertGaussJordan(Tida.Geometry.Alternation.Matrix)">
+            ¸´¾ØÕóÇóÄæµÄÈ«Ñ¡Ö÷Ôª¸ßË¹£­Ô¼µ±·¨
+            
+            @param mtxImag - ¸´¾ØÕóµÄÐé²¿¾ØÕó£¬µ±Ç°¾ØÕóÎª¸´¾ØÕóµÄÊµ²¿
+            @return boolÐÍ£¬ÇóÄæÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.InvertSsgj">
+            ¶Ô³ÆÕý¶¨¾ØÕóµÄÇóÄæ
+            
+            @return boolÐÍ£¬ÇóÄæÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.InvertTrench">
+            ÍÐ²®Àû×È¾ØÕóÇóÄæµÄ°£À¼ÌØ·½·¨
+            
+            @return boolÐÍ£¬ÇóÄæÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ComputeDetGauss">
+            ÇóÐÐÁÐÊ½ÖµµÄÈ«Ñ¡Ö÷Ôª¸ßË¹ÏûÈ¥·¨
+            
+            @return doubleÐÍ£¬ÐÐÁÐÊ½µÄÖµ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ComputeRankGauss">
+            Çó¾ØÕóÖÈµÄÈ«Ñ¡Ö÷Ôª¸ßË¹ÏûÈ¥·¨
+            
+            @return intÐÍ£¬¾ØÕóµÄÖÈ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ComputeDetCholesky(System.Double@)">
+            ¶Ô³ÆÕý¶¨¾ØÕóµÄÇÇÀïË¹»ù·Ö½âÓëÐÐÁÐÊ½µÄÇóÖµ
+            
+            @param realDetValue - ·µ»ØÐÐÁÐÊ½µÄÖµ
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.SplitLU(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix)">
+            ¾ØÕóµÄÈý½Ç·Ö½â£¬·Ö½â³É¹¦ºó£¬Ô­¾ØÕó½«³ÉÎªQ¾ØÕó
+            
+            @param mtxL - ·µ»Ø·Ö½âºóµÄL¾ØÕó
+            @param mtxU - ·µ»Ø·Ö½âºóµÄU¾ØÕó
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.SplitQR(Tida.Geometry.Alternation.Matrix)">
+            Ò»°ãÊµ¾ØÕóµÄQR·Ö½â£¬·Ö½â³É¹¦ºó£¬Ô­¾ØÕó½«³ÉÎªR¾ØÕó
+            
+            @param mtxQ - ·µ»Ø·Ö½âºóµÄQ¾ØÕó
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.SplitUV(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,System.Double)">
+            Ò»°ãÊµ¾ØÕóµÄÆæÒìÖµ·Ö½â£¬·Ö½â³É¹¦ºó£¬Ô­¾ØÕó¶Ô½ÇÏßÔªËØ¾ÍÊÇ¾ØÕóµÄÆæÒìÖµ
+            
+            @param mtxU - ·µ»Ø·Ö½âºóµÄU¾ØÕó
+            @param mtxV - ·µ»Ø·Ö½âºóµÄV¾ØÕó
+            @param eps - ¼ÆËã¾«¶È
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ppp(System.Double[],System.Double[],System.Double[],System.Double[],System.Int32,System.Int32)">
+            ÄÚ²¿º¯Êý£¬ÓÉSplitUVº¯Êýµ÷ÓÃ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.sss(System.Double[],System.Double[])">
+            ÄÚ²¿º¯Êý£¬ÓÉSplitUVº¯Êýµ÷ÓÃ
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.InvertUV(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,System.Double)">
+            Çó¹ãÒåÄæµÄÆæÒìÖµ·Ö½â·¨£¬·Ö½â³É¹¦ºó£¬Ô­¾ØÕó¶Ô½ÇÏßÔªËØ¾ÍÊÇ¾ØÕóµÄÆæÒìÖµ
+            
+            @param mtxAP - ·µ»ØÔ­¾ØÕóµÄ¹ãÒåÄæ¾ØÕó
+            @param mtxU - ·µ»Ø·Ö½âºóµÄU¾ØÕó
+            @param mtxV - ·µ»Ø·Ö½âºóµÄV¾ØÕó
+            @param eps - ¼ÆËã¾«¶È
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.MakeSymTri(Tida.Geometry.Alternation.Matrix,Tida.Geometry.Alternation.Matrix,System.Double[],System.Double[])">
+            Ô¼»¯¶Ô³Æ¾ØÕóÎª¶Ô³ÆÈý¶Ô½ÇÕóµÄºÀË¹ºÉ¶ûµÂ±ä»»·¨
+            
+            @param mtxQ - ·µ»ØºÀË¹ºÉ¶ûµÂ±ä»»µÄ³Ë»ý¾ØÕóQ
+            @param mtxT - ·µ»ØÇóµÃµÄ¶Ô³ÆÈý¶Ô½ÇÕó
+            @param dblB - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬·µ»Ø¶Ô³ÆÈý¶Ô½ÇÕóµÄÖ÷¶Ô½ÇÏßÔªËØ
+            @param dblC - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬Ç°n-1¸öÔªËØ·µ»Ø¶Ô³ÆÈý¶Ô½ÇÕóµÄ
+                          ´Î¶Ô½ÇÏßÔªËØ
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ComputeEvSymTri(System.Double[],System.Double[],Tida.Geometry.Alternation.Matrix,System.Int32,System.Double)">
+             Êµ¶Ô³ÆÈý¶Ô½ÇÕóµÄÈ«²¿ÌØÕ÷ÖµÓëÌØÕ÷ÏòÁ¿µÄ¼ÆËã
+             
+             @param dblB - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬´«Èë¶Ô³ÆÈý¶Ô½ÇÕóµÄÖ÷¶Ô½ÇÏßÔªËØ£»
+            			     ·µ»ØÊ±´æ·ÅÈ«²¿ÌØÕ÷Öµ¡£
+             @param dblC - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬Ç°n-1¸öÔªËØ´«Èë¶Ô³ÆÈý¶Ô½ÇÕóµÄ
+                           ´Î¶Ô½ÇÏßÔªËØ
+             @param mtxQ - Èç¹û´«Èëµ¥Î»¾ØÕó£¬Ôò·µ»ØÊµ¶Ô³ÆÈý¶Ô½ÇÕóµÄÌØÕ÷ÖµÏòÁ¿¾ØÕó£»
+            			     Èç¹û´«ÈëMakeSymTriº¯ÊýÇóµÃµÄ¾ØÕóAµÄºÀË¹ºÉ¶ûµÂ±ä»»µÄ³Ë»ý
+                           ¾ØÕóQ£¬Ôò·µ»Ø¾ØÕóAµÄÌØÕ÷ÖµÏòÁ¿¾ØÕó¡£ÆäÖÐµÚiÁÐÎªÓëÊý×édblB
+                           ÖÐµÚj¸öÌØÕ÷Öµ¶ÔÓ¦µÄÌØÕ÷ÏòÁ¿¡£
+             @param nMaxIt - µü´ú´ÎÊý
+             @param eps - ¼ÆËã¾«¶È
+             @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.MakeHberg">
+            Ô¼»¯Ò»°ãÊµ¾ØÕóÎªºÕÉê²®¸ñ¾ØÕóµÄ³õµÈÏàËÆ±ä»»·¨
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ComputeEvHBerg(System.Double[],System.Double[],System.Int32,System.Double)">
+            ÇóºÕÉê²®¸ñ¾ØÕóÈ«²¿ÌØÕ÷ÖµµÄQR·½·¨
+            
+            @param dblU - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬·µ»ØÊ±´æ·ÅÌØÕ÷ÖµµÄÊµ²¿
+            @param dblV - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬·µ»ØÊ±´æ·ÅÌØÕ÷ÖµµÄÐé²¿
+            @param nMaxIt - µü´ú´ÎÊý
+            @param eps - ¼ÆËã¾«¶È
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ComputeEvJacobi(System.Double[],Tida.Geometry.Alternation.Matrix,System.Int32,System.Double)">
+            ÇóÊµ¶Ô³Æ¾ØÕóÌØÕ÷ÖµÓëÌØÕ÷ÏòÁ¿µÄÑÅ¿É±È·¨
+            
+            @param dblEigenValue - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬·µ»ØÊ±´æ·ÅÌØÕ÷Öµ
+            @param mtxEigenVector - ·µ»ØÊ±´æ·ÅÌØÕ÷ÏòÁ¿¾ØÕó£¬ÆäÖÐµÚiÁÐÎªÓëÊý×é
+                                    dblEigenValueÖÐµÚj¸öÌØÕ÷Öµ¶ÔÓ¦µÄÌØÕ÷ÏòÁ¿
+            @param nMaxIt - µü´ú´ÎÊý
+            @param eps - ¼ÆËã¾«¶È
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix.ComputeEvJacobi(System.Double[],Tida.Geometry.Alternation.Matrix,System.Double)">
+            ÇóÊµ¶Ô³Æ¾ØÕóÌØÕ÷ÖµÓëÌØÕ÷ÏòÁ¿µÄÑÅ¿É±È¹ý¹Ø·¨
+            
+            @param dblEigenValue - Ò»Î¬Êý×é£¬³¤¶ÈÎª¾ØÕóµÄ½×Êý£¬·µ»ØÊ±´æ·ÅÌØÕ÷Öµ
+            @param mtxEigenVector - ·µ»ØÊ±´æ·ÅÌØÕ÷ÏòÁ¿¾ØÕó£¬ÆäÖÐµÚiÁÐÎªÓëÊý×é
+                                    dblEigenValueÖÐµÚj¸öÌØÕ÷Öµ¶ÔÓ¦µÄÌØÕ÷ÏòÁ¿
+            @param eps - ¼ÆËã¾«¶È
+            @return boolÐÍ£¬Çó½âÊÇ·ñ³É¹¦
+        </member>
+        <member name="T:Tida.Geometry.Alternation.Matrix4">
+            <summary>
+            ¿Õ¼ä×ª»»¾ØÕó
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.Matrix4.Elements">
+            <summary>
+            ÊýÖµ»º³åÇø
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.#ctor">
+            <summary>
+            Ë½ÓÐ¹¹Ôìº¯Êý
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.#ctor(System.Double[])">
+            <summary>
+            ³õÊ¼»¯Ò»¸ö¾ØÕó
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.#ctor(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ÓÃÒÑÓÐ¾ØÕóÉèÖÃµ±Ç°¾ØÕó
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetData(System.Double[])">
+            <summary>
+            ÉèÖÃ¾ØÕó¸÷ÔªËØµÄÖµ
+            </summary>
+            <param name="value">Ò»Î¬Êý×é£¬³¤¶ÈÎªnumColumns*numRows£¬´æ´¢¾ØÕó¸÷ÔªËØµÄÖµ</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Init(System.Int32,System.Int32)">
+            <summary>
+            ³õÊ¼»¯º¯Êý
+            </summary>
+            <param name="nRows">Ö¸¶¨µÄ¾ØÕóÐÐÊý</param>
+            <param name="nCols">Ö¸¶¨µÄ¾ØÕóÁÐÊý</param>
+            <returns>³É¹¦·µ»Øtrue, ·ñÔò·µ»Øfalse</returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Create">
+            <summary>
+            ´´½¨Ò»¸öÄ¬ÈÏµÄ¾ØÕó
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetIndentity">
+            <summary>
+            ÖØ¶¨Òå¾ØÕó
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.Matrix4.Item(System.Int32,System.Int32)">
+            <summary>
+            Ë÷ÒýÆ÷: ·ÃÎÊ¾ØÕóÔªËØ 
+            </summary>
+            <param name="row">ÔªËØµÄÐÐ</param>
+            <param name="col">ÔªËØµÄÁÐ</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Clone">
+            <summary>
+            ¿½±´Ò»¸öÐÂÊµÀý
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Copy(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ´ÓÆäËû¾ØÕó¿½±´
+            </summary>
+            <param name="m4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.CopyPosition(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ¿½±´¾ØÕóµÄÆ½ÒÆÎ»ÖÃÐÅÏ¢
+            </summary>
+            <param name="m4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Add(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ÊµÏÖ¾ØÕóµÄ¼Ó·¨
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Subtract(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ÊµÏÖ¾ØÕóµÄ¼õ·¨
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Multiply(System.Double)">
+            <summary>
+            ÊµÏÖ¾ØÕóµÄÊý³Ë
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Concat(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ¾ØÕóµÄÏà³ËÁ¬½Ó
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Transpose">
+            <summary>
+            ¾ØÕóµÄ×ªÖÃ
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetInverseOf(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ¾ØÕóµÄÄæ¾ØÕó
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.InvertSelf">
+            <summary>
+            ¼ÆËãÄæ¾ØÕó
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.GetInverse">
+            <summary>
+            ¼ÆËãÄæ¾ØÕó
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetOrtho(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            ÉèÖÃÕý½»¾ØÕó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Ortho(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            ÉèÖÃÕý½»¾ØÕó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetFrustum(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            ÉèÖÃ¼ôÇÐ¾ØÕó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Frustum(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            ÉèÖÃ¼ôÇÐ¾ØÕó
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <param name="bottom"></param>
+            <param name="top"></param>
+            <param name="near"></param>
+            <param name="far"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetPerspective(System.Double,System.Double,System.Double,System.Double)">
+            ÉèÖÃÍ¶Ó°¾ØÕó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Perspective(System.Double,System.Double,System.Double,System.Double)">
+            ½øÐÐ¾ØÕó±ä»»
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetScale(System.Double,System.Double,System.Double)">
+            ½øÐÐ¾ØÕóµÄËõ·Å
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Scale(System.Double,System.Double,System.Double)">
+            ¾ØÕóµÄËõ·Å
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetTranslation(System.Double,System.Double,System.Double)">
+            ¾ØÕóµÄÒÆ¶¯
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Translation(System.Double,System.Double,System.Double)">
+            ¾ØÕóµÄÒÆ¶¯
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetRotate(System.Double,System.Double,System.Double,System.Double)">
+            ¾ØÕóµÄ½Ç¶È×ª¶¯
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Rotate(System.Double,System.Double,System.Double,System.Double)">
+            ¾ØÕóµÄ×ª¶¯
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetLookAt(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            ²é¿´ÎïÌå
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.LookAt(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            ²é¿´ÎïÌå
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.GetMaxScaleOnAxis">
+            <summary>
+            »ñÈ¡¾ØÕóµÄ×î´óËõ·ÅÖµ
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.SetOrthographic(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            ÉèÖÃµ±Ç°Õý½»¾ØÕó
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <param name="top"></param>
+            <param name="bottom"></param>
+            <param name="near"></param>
+            <param name="far"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.Multiply(Tida.Geometry.Alternation.Matrix4)">
+            ÊµÏÖ¾ØÕóµÄ³Ë·¨
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.op_Addition(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Alternation.Matrix4)">
+            ÖØÔØ + ÔËËã·û
+            
+            @return Matrix¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.op_Subtraction(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Alternation.Matrix4)">
+            ÖØÔØ - ÔËËã·û
+            
+            @return Matrix¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.op_Multiply(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Alternation.Matrix4)">
+            ÖØÔØ * ÔËËã·û
+            
+            @return Matrix¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.op_Multiply(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            µãµÄ×ø±ê×ª»»
+            </summary>
+            <param name="m"></param>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.TransformVector(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            ÏòÁ¿µÄ×ø±ê×ª»»
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.op_Implicit(Tida.Geometry.Alternation.Matrix4)~System.Double[]">
+            ÖØÔØ double[] ÔËËã·û
+            
+            @return double[]¶ÔÏó
+        </member>
+        <member name="M:Tida.Geometry.Alternation.Matrix4.IsAlmostEqualTo(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            ÅÐ¶ÏÁ½¸ö¾ØÕóÊÇ·ñÏàµÈ
+            </summary>
+            <param name="m4"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.TransformUtil.Position">
+            <summary>
+            在世界坐标系中的位置
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.TransformUtil.LocalPosition">
+            <summary>
+            在转换坐标系中的位置
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.TransformUtil.PerspectiveProjection">
+            <summary>
+            当前投影中心点的位置
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Alternation.TransformUtil.Matrix">
+            <summary>
+            构造函数，初始化当前的矩阵信息
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.#ctor">
+            <summary>
+            构造函数，初始化一个矩阵信息
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.#ctor(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            使用指定矩阵，生成一个Transform
+            </summary>
+            <param name="matrix"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Translate(System.Double,System.Double,System.Double)">
+            <summary>
+            在矩阵中移动
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="z"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.TranslateX(System.Double)">
+            <summary>
+            X轴的移动
+            </summary>
+            <param name="x"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.TranslateY(System.Double)">
+            <summary>
+            Y轴的移动
+            </summary>
+            <param name="y"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.TranslateZ(System.Double)">
+            <summary>
+            Z轴的移动
+            </summary>
+            <param name="z"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Scale(System.Double,System.Double,System.Double)">
+            <summary>
+            当前图形的缩放
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="z"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.ScaleX(System.Double)">
+            <summary>
+            X轴的缩放
+            </summary>
+            <param name="x"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.ScaleY(System.Double)">
+            <summary>
+            Y轴的缩放
+            </summary>
+            <param name="y"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.ScaleZ(System.Double)">
+            <summary>
+            Z轴的缩放
+            </summary>
+            <param name="z"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Rotate(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            坐标轴的转动
+            </summary>
+            <param name="angle"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="z"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.RotateX(System.Double,System.Double)">
+            <summary>
+            在X轴上的转动
+            </summary>
+            <param name="angle"></param>
+            <param name="x"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.RotateY(System.Double,System.Double)">
+            <summary>
+            在Y轴上的转动
+            </summary>
+            <param name="angle"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.RotateZ(System.Double,System.Double)">
+            <summary>
+            在Z轴上的转动
+            </summary>
+            <param name="angle"></param>
+            <param name="z"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Skew(System.Double,System.Double)">
+            <summary>
+            图形的切错
+            </summary>
+            <param name="x_angle"></param>
+            <param name="y_angle"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.SkewX(System.Double)">
+            <summary>
+            X轴方向的切错
+            </summary>
+            <param name="x_angle"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.SkewY(System.Double)">
+            <summary>
+            Y轴方向的切错
+            </summary>
+            <param name="y_angle"></param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.TransformDirection(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            转换向量
+            </summary>
+            <param name="transMatrix"></param>
+            <param name="direction">方向向量</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.TransformPoint(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            转换三维点坐标
+            </summary>
+            <param name="transMatrix"></param>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.TransformLines(Tida.Geometry.Alternation.Matrix4,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            批量转换线段集合的坐标
+            </summary>
+            <param name="transMatrix">转换矩阵</param>
+            <param name="line3Ds">待转换的线</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.TransformLine(Tida.Geometry.Alternation.Matrix4,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            转换三维线段坐标
+            </summary>
+            <param name="transMatrix"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Projection(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            将三维坐标，直接平移为平面二维坐标
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Transform(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            将三维坐标，直接投影为到其他平面
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Projection(Tida.Geometry.Primitives.Vector2D,System.Double)">
+            <summary>
+            直接将二维坐标转换到指定的空间坐标
+            </summary>
+            <param name="v"></param>
+            <param name="z"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Projection(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            将三维线直接投影为二维线段
+            </summary>
+            <param name="line3d"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Projection(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            将三维线直接投影为二维线段
+            </summary>
+            <param name="line3d"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Projection(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Double)">
+            <summary>
+            将三维还原到二维平面中
+            </summary>
+            <param name="line2ds"></param>
+            <param name="z"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Transform(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            进行投影转换操作
+            </summary>
+            <param name="line3D"></param>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Transform(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            坐标系转换
+            </summary>
+            <param name="transMatrix">转换矩阵</param>
+            <param name="line3Ds">待转换的线</param>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Projection(Tida.Geometry.Primitives.Line2D,System.Double)">
+            <summary>
+            将二维线段，向上偏移到三维空间
+            </summary>
+            <param name="line2d"></param>
+            <param name="z"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.Mirror(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            获取一个点的镜像点
+            </summary>
+            <param name="v"></param>
+            <param name="l"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.GetMatrix(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            通过一个点，和点上三个对应的三个互相垂直的线，获取一个转换矩阵
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.GetMatrix(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            通过直线获取转换矩阵
+            </summary>
+            <param name="searchLines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Alternation.TransformUtil.GetInversetMatrix(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            获取一个矩阵的逆矩阵
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.ClosedLinesAlgorithm.SearchLines">
+            <summary>
+            原始的线段
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.ClosedLinesAlgorithm.IsLargeRegion">
+            <summary>
+            查找的区域是最大区域
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.ClosedLinesAlgorithm.OrginLine">
+            <summary>
+            查找的起点
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.ClosedLinesAlgorithm.IsDecompose">
+            <summary>
+            当前线段是否允许打断
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.ClosedLinesAlgorithm.Elevation">
+            <summary>
+            当前线段的高度信息
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLinesAlgorithm.#ctor(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Boolean,System.Boolean,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            构造函数,此方法之能处理同一个平面的所有线段
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLinesAlgorithm.Find">
+            <summary>
+            开始查找
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.External.ClosedLinesAlgorithm.OrginLine2">
+            <summary>
+            查找的起点
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLinesAlgorithm.FindOuterLinessWithAngle(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            获取夹角最大的墙体
+            </summary>
+            <param name="huntWalls"></param>
+            <param name="origin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLinesAlgorithm.OtherPointOfWall(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            已知一条curve的一个端点，返回另一个端点
+            </summary>
+            <param name="curve"></param>
+            <param name="point1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLinesAlgorithm.GetHuntWithOrigin(Tida.Geometry.Primitives.Vector2D@,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            获取最靠近原点的墙体
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLinesAlgorithm.GetHuntLines(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            获取相撞的墙体信息,不能包含自己
+            </summary>
+            <param name="origin"></param>
+            <param name="remainingWalls"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLinesAlgorithm.isExitLine(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断当前集合是否已经存在当前线段
+            </summary>
+            <param name="??"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.External.ClosedLookupAlgorithm">
+            <summary>
+            查找封闭区域
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.Lookup(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Boolean,System.Boolean)">
+            <summary>
+            查找一个最大或者最小的封闭区域
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.Lookup(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean,System.Boolean)">
+            <summary>
+            查找最大和最小封闭区域
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+            <param name="isDecompose"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.FindMins(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}})">
+            <summary>
+            查找最小的封闭区域
+            </summary>
+            <param name="readyLines"></param>
+            <param name="larges"></param>
+            <param name="closets"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.FindMaxOne(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}@)">
+            <summary>
+            查找一个最大的封闭区域,不管图形形状，除弧形以外
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.FindOne(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean)">
+            <summary>
+            查找一个封闭区域
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+            <param name="startL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.FindBegin(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Vector2D@)">
+            <summary>
+            获取一个开始点，得到起始点
+            </summary>
+            <param name="origin"></param>
+            <param name="decomposeLine2ds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.FindHuntLines(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            获取相撞的墙体信息,不能包含自己
+            </summary>
+            <param name="origin"></param>
+            <param name="remainingWalls"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.FindClosestLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}@,Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            查找一个封闭的区域
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.HasLookin(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断当前集合是否已经存在当前线段
+            </summary>
+            <param name="??"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.Lookup(Tida.Geometry.Primitives.Polygon2D,System.Boolean,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            查找封闭区域
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+            <param name="startL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.Lookup(Tida.Geometry.Primitives.Polygon3D,System.Boolean,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            查找一个封闭区域
+            </summary>
+            <param name="polygon3D"></param>
+            <param name="isLargeRegion"></param>
+            <param name="startL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.OtherPointOfLine(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            已知一条curve的一个端点，返回另一个端点
+            </summary>
+            <param name="curve"></param>
+            <param name="point1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.GetHuntLines(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            获取相撞的墙体信息,不能包含自己
+            </summary>
+            <param name="origin"></param>
+            <param name="remainingWalls"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedLookupAlgorithm.RemoveLine(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            移除已经存在的线段
+            </summary>
+            <param name="outerlines"></param>
+            <param name="line"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.Lookup(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Boolean,System.Boolean)">
+            <summary>
+            查找一个最大或者最小的封闭区域
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.Lookup(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean,System.Boolean)">
+            <summary>
+            查找最大和最小封闭区域
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+            <param name="isDecompose"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.FindMins(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}})">
+            <summary>
+            查找最小的封闭区域
+            </summary>
+            <param name="readyLines"></param>
+            <param name="larges"></param>
+            <param name="closets"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.FindMaxOne(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}@)">
+            <summary>
+            查找一个最大的封闭区域,不管图形形状，除弧形以外
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.FindOne(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean)">
+            <summary>
+            查找一个封闭区域
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+            <param name="startL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.FindBegin(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Vector2D@)">
+            <summary>
+            获取一个开始点，得到起始点
+            </summary>
+            <param name="origin"></param>
+            <param name="decomposeLine2ds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.FindHuntLines(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            获取相撞的墙体信息,不能包含自己
+            </summary>
+            <param name="origin"></param>
+            <param name="remainingWalls"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.FindClosestLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}@,Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            查找一个封闭的区域
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.HasLookin(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断当前集合是否已经存在当前线段
+            </summary>
+            <param name="??"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.Lookup(Tida.Geometry.Primitives.Polygon2D,System.Boolean,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            查找封闭区域
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+            <param name="startL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.Lookup(Tida.Geometry.Primitives.Polygon3D,System.Boolean,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            查找一个封闭区域
+            </summary>
+            <param name="polygon3D"></param>
+            <param name="isLargeRegion"></param>
+            <param name="startL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.OtherPointOfLine(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            已知一条curve的一个端点，返回另一个端点
+            </summary>
+            <param name="curve"></param>
+            <param name="point1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ClosedRegionLookupAlgorithm.GetHuntLines(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            获取相撞的墙体信息,不能包含自己
+            </summary>
+            <param name="origin"></param>
+            <param name="remainingWalls"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.AreEqual(System.Double,System.Double)">
+            <summary>
+            判断两个double类型是否接近相等
+            </summary>
+            <param name="source1"></param>
+            <param name="source2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Distinct(System.Collections.Generic.List{System.Double})">
+            <summary>
+            去掉重复部分
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.MMtoInch(System.Double)">
+            <summary>
+            毫米转换英尺
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.InchtoMM(System.Double)">
+            <summary>
+            英尺转换毫米
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.MMtoInch(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            毫米转换英尺
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.InchtoMM(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            英尺转换毫米
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.DegToRad(System.Double)">
+            <summary>
+            角度转换为弧度
+            </summary>
+            <param name="angle"></param>s
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.RadToDeg(System.Double)">
+            <summary>
+            弧度转换为角度
+            </summary>
+            <param name="angle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.DistinctPoint(System.Collections.Generic.List{Tida.Geometry.Primitives.Vector2D})">
+            <summary>
+            按1e-6的容差对点的集合进行去重
+            </summary>
+            <param name="points"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsEndPoint(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            当前点是否是直线的端点
+            </summary>
+            <param name="source"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.RelativeToAbsoluteVector(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            将局部的向量转换至全局的向量;
+            </summary>
+            <param name="relativeSource">原局部向量</param>
+            <param name="relativedToVector">原局部向量相对的向量在全局坐标系的表示</param>
+            <exception cref="T:System.InvalidOperationException">相对向量长度为零</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.AbsoluteToRelativeVector(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            将全局的向量转换至局部的向量;
+            </summary>
+            <param name="absoluteSource">原局部向量</param>
+            <param name="relativedToVector">原局部向量相对的向量在全局坐标系的表示</param>
+            <exception cref="T:System.InvalidOperationException">相对向量长度为零</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPossiblyInRegion(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            判断是否不在region外部（在内部或边上）
+            </summary>
+            <param name="point"></param>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsInLine(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断是否在Line内部，不包括端点
+            </summary>
+            <param name="point"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsInRegion(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            判断一个点是否完全是region内部（不会在边上）
+            </summary>
+            <param name="point"></param>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsOnRegionEdge(Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            判断是否在region的边上  region.Any(item => point.IsOnLine(item));
+            </summary>
+            <param name="point"></param>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsOnLine(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断是否在line上，包括端点
+            </summary>
+            <param name="point"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOn(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            点投影到直线上的点
+            </summary>
+            <param name="point"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.VerticalDistanceTo(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            点到直线的垂直距离 
+            </summary>
+            <param name="point"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Distance(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            点到直线的最近距离，非垂直距离
+            </summary>
+            <param name="point"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Move(Tida.Geometry.Primitives.Vector2D,System.Double,System.Double)">
+            <summary>
+            移动指定向量的位置;
+            </summary>
+            <param name="x">移动的横长</param>
+            <param name="y">移动的纵长</param>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.CreateByOffset(Tida.Geometry.Primitives.Vector2D,System.Double,System.Double)">
+            <summary>
+            获取向量根据指定的偏移移动后的向量;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Move(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            移动;
+            </summary>
+            <param name="vector"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.DistinctPoint(System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D})">
+            <summary>
+            按1e-6的容差对点的集合进行去重
+            </summary>
+            <param name="points"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsEndPoint(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            计算一个点是否是一个直线的端点
+            </summary>
+            <param name="point"></param>
+            <param name="curve"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsAlmostEqualTo(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            比较两个点在默认误差范围(1e-6)内是否相同
+            </summary>
+            <param name="point1"></param>
+            <param name="point2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsAlmostEqualTo(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,System.Double)">
+            <summary>
+            比较两个点在误差范围内是否相同
+            </summary>
+            <param name="point1"></param>
+            <param name="point2"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.AngleTo(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量的夹角，值域为[0,π]
+            </summary>
+            <param name="v1"></param>
+            <param name="v2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.AngleWith(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量所在直线的夹角，值域为[0,π/2]
+            </summary>
+            <param name="v"></param>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.AngleFrom(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+             <summary>
+            向量source逆时针到旋转到终点向量的角度（均为平行于水平面的向量），值域为[0 ,2π)（平行于水平面的向量）
+             </summary>
+             <param name="v"></param>
+             <param name="source"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.AngleFrom(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            设定一个参考平面的法向量，向量source逆时针旋转到终点向量的角度，值域为[0 ,2π)
+            </summary>
+            <param name="v"></param>
+            <param name="source"></param>
+            <param name="refNormal">参考平面的法向量，与视线看过去的方向相反</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsOnLine(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D,System.Double)">
+            <summary>
+            判断是否在line3D上，包括端点
+            </summary>
+            <param name="point"></param>
+            <param name="line3D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPassPoint(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            判断线段是否经过一个点
+            </summary>
+            <param name="line"></param>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsInLine(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断是否在line3D上，不包括端点
+            </summary>
+            <param name="point"></param>
+            <param name="line3D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsOnTwoLine(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            是否同时在两条线上
+            </summary>
+            <param name="point"></param>
+            <param name="line1"></param>
+            <param name="line2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Distance(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            点到线段的最近距离(不一定是垂直距离)
+            </summary>
+            <param name="line3D"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Distance(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Face)">
+            <summary>
+            点到面的最近距离，即为点到面区域内最近的距离
+            </summary>
+            <param name="source"></param>
+            <param name="face"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPointOnRegion(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            判断点是否在区域内（包括点是否在边上）
+            </summary>
+            <param name="point"></param>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.HorizontalDistanceOfPoints(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            获取两点之间的水平距离
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.OrderByXYZ(System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D})">
+            <summary>
+            给同一直线上的点，按照坐标从小到大排序，并按照X、Y、Z的优先级依次排列（修改版本）
+            如果是不在同一直线，但是同一平面，获得的direction不准确（可以考虑用法线判断）
+            </summary>
+            <param name="sourcePoints"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.OrderByDirection(System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D},Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            给同一条直线的点，按照线的方向排序
+            </summary>
+            <param name="sourcePoints"></param>
+            <param name="lineDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOn(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            返回点投影到直线上的点
+            </summary>
+            <param name="v1"></param>
+            <param name="line3D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOn(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Face)">
+            <summary>
+            点在面上
+            </summary>
+            <param name="v1"></param>
+            <param name="face"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOn(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            点投影在面上
+            </summary>
+            <param name="v1">要投影的点</param>
+            <param name="origin">投影平面的原点</param>
+            <param name="normal">投影平面的法向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOn(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Face)">
+            <summary>
+            线在面上
+            </summary>
+            <param name="line"></param>
+            <param name="face"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOn(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            线段投影在面上
+            </summary>
+            <param name="line">要投影的线段</param>
+            <param name="origin">投影平面的原点</param>
+            <param name="normal">投影平面的法向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOnXoY(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            将点影到xoy屏幕
+            </summary>
+            <param name="line">需要投影的线</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsParallel(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            判断两个向量是否平行
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsParallel(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断两个条线段是否平行
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.CreateLine(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            过一个点沿direction做直线（长度为1e7）
+            </summary>
+            <param name="point"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Decompose(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            线段相互打断，分解成最小单元
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.DivideViaPoints(Tida.Geometry.Primitives.Line2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Vector2D})">
+            <summary>
+            返回直线被点分割后的线段
+            </summary>
+            <param name="line2D"></param>
+            <param name="points"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Extend(Tida.Geometry.Primitives.Line2D,System.Double,System.Double)">
+            <summary>
+            偏移值若为正向外偏移，若为负向内偏移。
+            </summary>
+            <param name="startExtend"></param>
+            <param name="endExtend"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Flip(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            从逆时针转成顺时针或相反
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetEndPoints(System.Collections.Generic.IEnumerable{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            获得直线的端点，无重复
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsCollinearWith(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断是否与line共线
+            </summary>
+            <param name="source"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsCounterclockwise(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsOnRegionEdge(Tida.Geometry.Primitives.Line2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            完全在区域边内部或跟边相同
+            </summary>
+            <param name="line2D"></param>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPartInRegion(Tida.Geometry.Primitives.Line2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Vector2D}@)">
+            <summary>
+            一部分在region内
+            </summary>
+            <param name="line2D"></param>
+            <param name="region"></param>
+            <param name="intersections"></param>
+            <returns>传出与region的交点</returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPartOnRegionEdge(Tida.Geometry.Primitives.Line2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            一部分在区域边界上
+            </summary>
+            <param name="line2D"></param>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPartInRegion(Tida.Geometry.Primitives.Line2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}@)">
+            <summary>
+            一部分在region内或边上，一部分在region外，不包含只有一个点在边界上的情况
+            </summary>
+            <param name="line2D"></param>
+            <param name="region"></param>
+            <param name="innerLine"></param>
+            <returns>传出region内部的线段</returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPartOnRegionEdge(Tida.Geometry.Primitives.Line2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}@)">
+            <summary>
+            一部分在region内或边上，一部分在region外，不包含只有一个点在边界上的情况
+            </summary>
+            <param name="line2D"></param>
+            <param name="region"></param>
+            <param name="innerLine"></param>
+            <returns>传出在区域边界的部分</returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsSuperpositionWithRegionEdge(Tida.Geometry.Primitives.Line2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            是否和当前边缘线叠加
+            </summary>
+            <param name="line"></param>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsParallelWith(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断是否与line平行
+            </summary>
+            <param name="source"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPartOf(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            一个线属于例外一个线的一部分，//line和source调换位置，让它符合命名，调用它的代码也做了相应修改，2017-6-9-ByJohnny
+            </summary>
+            <param name="source"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Minus(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            两线段的差集
+            </summary>
+            <param name="line1"></param>
+            <param name="line2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Copy(Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            拷贝一个线
+            </summary>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Copy(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            拷贝所有的线段
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.SortLinesContinuously(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            按顺序排序
+            </summary>
+            <param name="originalLines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IntersectWithLine(Tida.Geometry.Primitives.Ellipse2D,Tida.Geometry.Primitives.Line2D,System.Boolean)">
+            <summary>
+            求解椭圆与线段交点;
+            </summary>
+            <param name="ellipse2D"></param>
+            <param name="line2D"></param>
+            <param name="pinIncluded">是否包括端点</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IntersectWithStraightLine(Tida.Geometry.Primitives.Ellipse2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            求解椭圆与直线交点;
+            </summary>
+            <param name="ellipse2D"></param>
+            <param name="line2D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsOnEllipse(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Ellipse2D)">
+            <summary>
+            判断某个位置是否在椭圆上;
+            </summary>
+            <param name="ellipse2D"></param>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsInEllipse(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Ellipse2D)">
+            <summary>
+            判断某个位置是否在椭圆内;
+            </summary>
+            <param name="point"></param>
+            <param name="ellipse2D"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.External.Extension.RangeFlag">
+            <summary>
+            表示在点与封闭图形的包含情况;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.RangeOf(Tida.Geometry.Primitives.Ellipse2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            判断点与椭圆的包含情况,内部使用;
+            </summary>
+            <param name="point"></param>
+            <param name="ellipse2D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.VerticalDistanceTo(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            求两条直线（有端点的直线）之间的垂直距离
+            </summary>
+            <param name="line1"></param>
+            <param name="line2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.VerticalDistanceTo(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            求点与直线的垂直距离
+            </summary>
+            <param name="line1"></param>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Extend(Tida.Geometry.Primitives.Line3D,System.Double,System.Double)">
+            <summary>
+            偏移值若为正向外偏移，若为负向内偏移。
+            </summary>
+            <param name="line3D"></param>
+            <param name="startExtend"></param>
+            <param name="endExtend"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsPartOf(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            当前线是否是当前线的一部分
+            </summary>
+            <param name="source"></param>
+            <param name="curve2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.CoincidesWith(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            是否重合
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.CreateReverse(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            创建一条新line3d，端点相反
+            </summary>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetPedal(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            点到空间直线的垂足
+            </summary>
+            <param name="line3D"></param>
+            <param name="point">三维空间中的某点</param>
+            <returns>返回该直线上空间点的垂足</returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsHorizontal(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断当前线段是否是水平的
+            </summary>
+            <param name="line3D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsParallelWith(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断是否与line平行
+            </summary>
+            <param name="source"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsCollinearWith(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断是否与line共线
+            </summary>
+            <param name="source"></param>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsCounterclockwise(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            
+            </summary>
+            <param name="lines">原始线段集合</param>
+            <param name="normal">参考平面的方向</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOnXoY(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            将线投影到xoy屏幕
+            </summary>
+            <param name="line">需要投影的线</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.TrimZ(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            Z坐标截断，变成二维坐标
+            </summary>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOnXoY(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            将线投影到xoy屏幕
+            </summary>
+            <param name="lines">需要投影的线</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.SortLinesByCounterClockwise(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            对线集合逆时针排序
+            </summary>
+            <param name="originalLines"></param>
+            <param name="normal">参考平面的法线，与看的视线方向相反</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.SortLinesContinuously(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            
+            </summary>
+            <param name="originalLines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.IsContinuous(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            线段是否连续，首尾相接
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ReSort(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Int32)">
+            <summary>
+            以第i个元素为起点，重新排序
+            </summary>
+            <param name="lines"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Line3DsContainOneOfLine3Ds(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            当前多线段中，是否包含指定的线段集合中一条线段
+            </summary>
+            <param name="lines"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetOrigin(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取多边形原点
+            </summary>
+            <param name="edges"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetCenter(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取规则多边形的中心点
+            </summary>
+            <param name="edges"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetNormal(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取当前多边形的法向量
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetNormalInConvexPoint(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获得多边形在阳角点的法向量
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Copy(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            拷贝一个多边形线段
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Copy(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            拷贝一个多边形线段
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Offset(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Double,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            将所有的线进行偏移得到新的线段集合
+            </summary>
+            <param name="lines"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Offset(Tida.Geometry.Primitives.Face,System.Double,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向指定方向偏移一点距离
+            </summary>
+            <param name="f"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.ProjectOn(Tida.Geometry.Primitives.Face,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            面投影到某个平面上
+            </summary>
+            <param name="face">要投影的面</param>
+            <param name="origin">投影平面的原点</param>
+            <param name="normal">投影平面的法向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Line3D2Line2D(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            三维线段转换为二维线段，是将三维线段投影到XOY平面，转换为二维线段
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Vector3D2Vector2D(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            三维点转换为二维点，是将三维点投影到XOY平面，转换为二维点
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Line2D2Line3D(Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            二维线段转换为三维线段
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Vector2D2Vector3D(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            二维点转换为三维点
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Expansion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Double)">
+            <summary>
+            线段集合的扩张和收缩，向外扩张获得线段集合为1个，向内收缩获得的集合为多个或者null
+            </summary>
+            <param name="lines"></param>
+            <param name="expandDistance">正为向外扩张，负则向内收缩</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.Expansion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Double)">
+            <summary>
+            线段集合的扩张和收缩
+            </summary>
+            <param name="lines"></param>
+            <param name="expandDistance">正为向外扩张，负则向内收缩</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.CheckLinesValidation(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            检查线段的合法性，判断连续的两条线段不能共线
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.DeleteLinesOutOfRegion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}},System.Double)">
+            <summary>
+            删除区域外的线
+            </summary>
+            <param name="originalLines"></param>
+            <param name="sourceLines"></param>
+            <param name="offsetDistance"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.FindClosedArea(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Double,System.Boolean)">
+            <summary>
+            找到封闭区域
+            </summary>
+            <param name="originalLines"></param>
+            <param name="expandedLines"></param>
+            <param name="expandDistance"></param>
+            <param name="isExpanded"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetNewOutLines2(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            从偏移的线获得新的轮廓线，轮廓线按照原顺序排列
+            </summary>
+            <param name="lines">按序排列的线，并且没有共端点</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Extension.GetNewOutLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            从偏移的线获得新的轮廓线
+            </summary>
+            <param name="lines">按序排列的线，并且没有共端点</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ExtensionGeometryUtil.GetTwoLineCommonPart(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="line1"></param>
+            <param name="line2"></param>
+            <param name="tolerance">判断的误差值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.ExtensionGeometryUtil.ProjectOnZ(Tida.Geometry.Primitives.Line3D,System.Double)">
+            <summary>
+            线投影到某个Z值高度的平面
+            </summary>
+            <param name="sourceLine"></param>
+            <param name="zValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.FloorDividingAlgorithm.FindAllFloorOutLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            
+            </summary>
+            <param name="allLines">         //allLines是连续的线</param>
+        </member>
+        <member name="M:Tida.Geometry.External.FloorDividingAlgorithm.DecomposeCurves(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            将Curve用交点打断，分解成最小的单元
+            </summary>
+            <param name="locationLines"></param>
+            <returns>返回分解后的curve</returns>
+        </member>
+        <member name="M:Tida.Geometry.External.FloorDividingAlgorithm.IsAtCurveEnd(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断点xyz是否为curve的端点
+            </summary>
+            <param name="xyz"></param>
+            <param name="curve"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GlobalToLocalCoordinateAlgorithm.#ctor(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            全局坐标系转换成局部坐标系
+            </summary>
+            <param name="localOrigin">局部坐标系中的原点</param>
+            <param name="axisX">局部坐标系中的x轴，是单位向量</param>
+            <param name="axisY">局部坐标系中的y轴，是单位向量</param>
+        </member>
+        <member name="M:Tida.Geometry.External.GlobalToLocalCoordinateAlgorithm.GetOZXTransformMatrix">
+            <summary>
+            旧坐标系转换到新坐标系的转换经过了三个步骤：原点平移，绕z轴旋转某个角度，绕x旋转某个角度；
+            如果旧坐标系到新坐标系不是这样变换来的，那当然不能使用这个方法；
+            平移矩阵，绕z旋转矩阵,绕x旋转矩阵，请参照计算机图形学相关知识
+            </summary>
+            <returns>返回旧坐标系转换到新坐标系的转换矩阵</returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GlobalToLocalCoordinateAlgorithm.GetRotationAngel(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+            <param name="positive">正方向</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GlobalToLocalCoordinateAlgorithm.GetRETransformMatrix">
+            <summary>
+            与Transform是相反的过程
+            </summary>
+            <returns>返回一个转换矩阵</returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.TwoParallelLines2D.GetSuperpositionPart">
+            <summary>
+            得到重复部分的线段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.TwoParallelLines3D.GetSuperpositionPart">
+            <summary>
+            得到重复部分的线段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.EliminateCollinearLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            去掉共线的线
+            </summary>
+            <param name="oldLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.EliminateCoincideLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            去掉重合的线段
+            </summary>
+            <param name="oldLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.GetCoupleofBasicDirection(Tida.Geometry.Primitives.Polygon2D)">
+            <summary>
+            获得一个多边形中任意垂直的一组边
+            </summary>
+            <param name="polygon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.GetAllPointOfGivenLineExtension(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            获取所有的点通过给定的直线
+            </summary>
+            <param name="lines"></param>
+            <param name="XVector"></param>
+            <param name="YVector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.HuntCurveByStartPoint(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},Tida.Geometry.Primitives.Vector2D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            对线段进行前后排序
+            </summary>
+            <param name="lines"></param>
+            <param name="point"></param>
+            <param name="sortedLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.HuntCurveByStartPoint(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            对线段进行前后排序
+            </summary>
+            <param name="lines"></param>
+            <param name="point"></param>
+            <param name="sortedLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            对同一直线上首尾相连的线段进行融合
+            </summary>
+            <param name="originalSortedLines">线是首尾相连的</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeLinesWithoutpoints(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D})">
+            <summary>
+            融合一直线上首尾相连的线段进行融合，但是要排除指定的点不融合
+            </summary>
+            <param name="originalSortedLines"></param>
+            <param name="withoutpoint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeLinesWithoutpoints(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Collections.Generic.List{Tida.Geometry.Primitives.Vector2D})">
+            <summary>
+            融合一直线上首尾相连的线段进行融合，但是要排除指定的点不融合
+            </summary>
+            <param name="originalSortedLines"></param>
+            <param name="withoutpoint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeOneLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            合并在一条线段上的所有线段
+            </summary>
+            <param name="sortLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeOneLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D})">
+            <summary>
+            合并在一条线段上的所有线段,除了指定的点
+            </summary>
+            <param name="sortLines"></param>
+            <param name="withoutpoints"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsPointInOrOnLinesArea(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            一个点是否在指定区域内部和线上
+            </summary>
+            <param name="point"></param>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsPointInLinesArea(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            判断点是否在curves内部
+            </summary>
+            <param name="point"></param>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsPointOnLines(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            判断点是否在多条线的某个线上
+            </summary>
+            <param name="point"></param>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsAtCurveEnd(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断点point是否为curve的端点
+            </summary>
+            <param name="point"></param>
+            <param name="curve"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeLine(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            融合一条直线上的线段，符合精度为float的线的融合
+            </summary>
+            <param name="oldLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeLine(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Int32)">
+            <summary>
+            给定比较的小数位数， 融合一条直线上的线段
+            </summary>
+            <param name="oldLines"></param>
+            <param name="tolerance">比较的小数位数</param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsEndPoint(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            是否是结点
+            </summary>
+            <param name="point"></param>
+            <param name="curve"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeTwoLine(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            适用于精度为float的线的融合（1e-6）
+            </summary>
+            <param name="line2D1"></param>
+            <param name="line2D2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeTwoLine(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D,System.Int32)">
+            <summary>
+            适用于指定精度为float的线的融合
+            </summary>
+            <param name="line2D1"></param>
+            <param name="line2D2"></param>
+            <param name="tolerance">需要保留的小数位数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.MergeTwoLine2(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D)">
+             <summary>
+            线的融合
+             </summary>
+             <param name="line2D1"></param>
+             <param name="line2D2"></param>
+             <param name="tolerance">需要保留的小数位数</param>
+             <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.OrderLinesByLength(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            按line的长度从大到小排列
+            </summary>
+            <param name="leftLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Partition(System.Double,System.Double,System.Collections.Generic.List{System.Double},System.Boolean)">
+            <summary>
+            用于对长的墙体进行打断
+            </summary>
+            <param name="partitionLength"></param>
+            <param name="expandCoef"></param>
+            <param name="seperations"></param>
+            <param name="firstPartitionable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Weed(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            剔除存在没有共享端点的线，这个线有一个端点不和任何其他线连接（只考虑所有打断的线）
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Weed(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            剔除存在没有共享端点的线，这个线有一个端点不和任何其他线连接（只考虑所有打断的线）
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.WeedLess(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            获取线段中，不属于闭合区域的所有线段
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.WeedLess(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取线段中，不属于闭合区域的所有线段
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.FindClosedLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Boolean,System.Boolean,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            查找一个闭合区域
+            </summary>
+            <param name="searchLines">需要查找的线段</param>
+            <param name="largeOrSmall">是查找最大区域，还是最小区域</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.FindClosedLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean,System.Boolean,Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            查找一个闭合区域
+            </summary>
+            <param name="searchLines">需要查找的线段</param>
+            <param name="largeOrSmall">是查找最大区域，还是最小区域</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.GetInjectionPoints(Tida.Geometry.Primitives.Line3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            获取与直线相交的所有线段,交点不包含后面2个点
+            </summary>
+            <param name="outLines"></param>
+            <param name="unbound1"></param>
+            <param name="wallStart"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.GetInjectionPoints(Tida.Geometry.Primitives.Line3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取直线和面的交点
+            </summary>
+            <param name="unbound"></param>
+            <param name="lines"></param>
+            <param name="v1"></param>
+            <param name="v2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsCollineation(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            是否是平行关系
+            </summary>
+            <param name="l1"></param>
+            <param name="l2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.CreatePlaneEquation(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            通过两条直线求平面方程
+            </summary>
+            <param name="line1"></param>
+            <param name="line2"></param>
+            <param name="A"></param>
+            <param name="B"></param>
+            <param name="C"></param>
+            <param name="D"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.CreatePlaneEquation(System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D},System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            构建一般式平面方程：Ax+By+Cz+D=0
+            </summary>
+            <param name="points">三个线性无关的点</param>
+            <param name="A">方程的系数</param>
+            <param name="B">方程的系数</param>
+            <param name="C">方程的系数</param>
+            <param name="D">方程的系数</param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.CreatePlaneEquation(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            创建平面方程
+            </summary>
+            <param name="layerOutLines"></param>
+            <param name="A">方程的系数</param>
+            <param name="B">方程的系数</param>
+            <param name="C">方程的系数</param>
+            <param name="D">方程的系数</param>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsParallel(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            判断两个三维面是否平行
+            </summary>
+            <param name="lines1"></param>
+            <param name="lines2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsParallel(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断线和面是否平行
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsCoplanarity(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断线是否在面上面
+            </summary>
+            <param name="lines1"></param>
+            <param name="lines2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsCoplanarity(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            判断两个多线段组成的面是否共面
+            </summary>
+            <param name="lines"></param>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsContainOtheRegion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            判断一条线是否在多边形的内部
+            </summary>
+            <param name="lines"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsContainOtheRegion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            判断后面的多边形是否在前面多边形的内部
+            </summary>
+            <param name="lines"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsContainOtheAllowanceRegion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Double)">
+            <summary>
+            在上下容差范围内，查找一个区域的水平投影，在另外一个区域的内部
+            </summary>
+            <param name="lines"></param>
+            <param name="compare"></param>
+            <param name="toterance">正值代表向上容差，赋值代表向下容差</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsContainOtheAllowanceRegion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            查找一个区域的水平投影，在另外一个区域的内部
+            </summary>
+            <param name="lines"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsContainOtheAllowanceRegion(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            查找一个区域的水平投影，在另外一个区域的内部
+            </summary>
+            <param name="lines"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.GetParallelRegionDistance(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取两个平行面之间的距离
+            </summary>
+            <param name="lines"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsCoincidenceWith(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Face)">
+            <summary>
+            判断两个多边形是否有线段重合
+            </summary>
+            <param name="f1"></param>
+            <param name="f2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.IsExternalCorner(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            判断当前墙线之间是否是阳角
+            </summary>
+            <param name="v"></param>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.GetCentrality(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取对称多边形中心点
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Line2D2Line3D(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            将二维的墙转换为自己定义的三维坐标系中
+            </summary>
+            <param name="line2D"></param>
+            <param name="wallOrgin"></param>
+            <param name="dir"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Line3D2Line2D(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            将三维的墙转换为自己定义的二维坐标系中
+            </summary>
+            <param name="line3D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Line3ds2Line2ds(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            将三维图形转换为二维图形
+            </summary>
+            <param name="line3ds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Line3ds2Polygon2D(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            将三维图形转换为二维图形
+            </summary>
+            <param name="line3ds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Line2D2Line3D(Tida.Geometry.Primitives.Line2D,System.Double)">
+            <summary>
+            将二维的墙转换为自己定义的三维坐标系中
+            </summary>
+            <param name="line"></param>
+            <param name="z"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Point2D2Vector3D(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            二维坐标点转换自定义的三维坐标点
+            </summary>
+            <param name="v"></param>
+            <param name="wallOrgin"></param>
+            <param name="dir"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.GetAreaofOutLines(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获取任意多边形的编辑
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Decompose(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            对指定的二维线段进行打断
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.Decompose(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            对指定的三维线段进行打断
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.GraphicAlgorithm.ClosedLookup(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D},System.Boolean,System.Boolean)">
+            <summary>
+            查找封闭区域
+            </summary>
+            <param name="searchLines"></param>
+            <param name="isLargeRegion"></param>
+            <param name="isDecompose"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.External.InRegionAlgorithm">
+            <summary>
+            利用射线法判断一个点是否在某个多边形的内部，此处要求多边形为平面多边形，即如果多边形为空间，则要投影到xoy平面再来判断，
+            以判定点为端点做一条x正向的射向，如果交点为偶数则点在外部，如果交点个数为基数则点在区域内
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.InRegionAlgorithm.Check(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            -1表示点在边上，1表示在内部，2表示在外部
+            </summary>
+            <param name="vector3D"></param>
+            <param name="outLines">投影到xoy平面后的楼板外轮廓</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.InRegionAlgorithm.IsIntersectAnt(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            以p为端点向x正向引射线，考察射线与线段交点的情况
+            射线与线段的关系，如果相交则返回1，如果不想交则返回0，如果点在线段上则返回-1
+            下端点指 线段的另一端y大于该端点，
+            </summary>
+            <param name="x">考察点的x坐标</param>
+            <param name="y">考察点的y坐标</param>
+            <param name="x1">线段1端点x坐标</param>
+            <param name="x2">线段2端点x坐标</param>
+            <param name="y1"></param>
+            <param name="y2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.External.LinesDecomposeAlgorithm">
+            <summary>
+            线段打断算法
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.LinesDecomposeAlgorithm.Decompose(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            将二维线段打断成最小的线单元
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.LinesDecomposeAlgorithm.Decompose(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            将三维线段打断成最小的单元
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.External.PartitionAlgorithm">
+            <summary>
+            对长墙进行打断算法
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.RectangleBooleanOperation.Operate(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},Tida.Geometry.Primitives.Vector3D@,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            
+            </summary>
+            <param name="osbOutLines">一个osb的轮廓线</param>
+            <param name="openningOutLines">一个洞口的轮廓线</param>
+            <param name="cutLocation">osb板被剪切掉的矩形区域的形心</param>
+            <param name="cutlines">osb板被剪切掉的矩形区域</param>
+        </member>
+        <member name="M:Tida.Geometry.External.RectangleBooleanOperation.GetCells(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D})">
+             <summary>
+            根据点将osb划分成多个小方格子
+             </summary>
+             <param name="osbOutLines"></param>
+             <param name="Points">划分小方格子的点</param>
+             <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.RectangleBooleanOperation.GetIntersectPointWithoutVertex(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            
+            </summary>
+            <param name="osbOutLines"></param>
+            <param name="openningOutLines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.RectangleBooleanOperation.GetpointInOSB(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            获得在osb板区域内的洞口的端点
+            </summary>
+            <param name="osbOutLines"></param>
+            <param name="openningOutLines"></param>
+            <returns>返回在osb轮廓线边上和内部的点</returns>
+        </member>
+        <member name="T:Tida.Geometry.External.Util.HitUtil">
+            <summary>
+            判定处理;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.HitUtil.LinesIntersect(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Line2D,System.Boolean,System.Boolean)">
+            <summary>
+            获得平面内两线段的交点;
+            </summary>
+            <param name="line0"></param>
+            <param name="lin11"></param>
+            <param name="extend0">是否无限延长线段0</param>
+            <param name="extend1">是否无限延长线段1</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.HitUtil.LineIntersectWithRect(Tida.Geometry.Primitives.Line2D,Tida.Geometry.Primitives.Rectangle2D)">
+            <summary>
+            获得平面内线段与矩形的交点;
+            </summary>
+            <param name="lp1"></param>
+            <param name="lp2"></param>
+            <param name="rect"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.HitUtil.Contains(Tida.Geometry.Primitives.Rectangle2D2,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            检查某个坐标是否处于某个矩形内部;
+            </summary>
+            <param name="rect"></param>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.External.Util.LineModel">
+            <summary>
+            数据模型
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.Util.LineModel.Line">
+            <summary>
+            线的信息
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.Util.LineModel.UseAge">
+            <summary>
+            使用次数
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.External.Util.LinesModelCreator">
+            <summary>
+            创建数据线段
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.LinesModelCreator.Create(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            用于创建当前的数据线段
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.External.Util.Pcg">
+            <summary>
+            PCG (Permuted Congruential Generator) is a C# port from C the base PCG generator
+            presented in "PCG: A Family of Simple Fast Space-Efficient Statistically Good
+            Algorithms for Random Number Generation" by Melissa E. O'Neill. The code follows closely the one 
+            made available by O'Neill at her site: http://www.pcg-random.org/download.html
+            To understand how exactly this generator works read this:
+            http://www.pcg-random.org/pdf/toms-oneill-pcg-family-v1.02.pdf 
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.Util.Pcg.Default">
+            <summary>
+            Default instance.
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.Pcg.PcgSeed.TimeBasedSeed">
+            <summary>
+            Provides a time-dependent seed value, matching the default behavior of System.Random.
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.Pcg.PcgSeed.GuidBasedSeed">
+            <summary>
+            Provides a seed based on time and unique GUIDs.
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.External.Util.SpatialFinder">
+            <summary>
+            用于查找当前的封闭区域
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.SpatialFinder.Find(System.Collections.Generic.List{Tida.Geometry.External.Util.LineModel})">
+            <summary>
+            查找所有的封闭区域，封闭区域的lineModel的位置是按逆时针排序，但线不是首尾相接的
+            </summary>
+            <param name="linemodels"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.SpatialFinder.GetSeparateInteriorLines(System.Collections.Generic.List{Tida.Geometry.External.Util.LineModel})">
+            <summary>
+            获取当前墙体，有一端没有和任何墙相交，属于分割墙体
+            </summary>
+            <param name="walls"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.SpatialFinder.FindSpatialFromLinesModel(System.Collections.Generic.List{Tida.Geometry.External.Util.LineModel},System.Collections.Generic.List{Tida.Geometry.External.Util.LineModel},System.Collections.Generic.List{Tida.Geometry.External.Util.SpatialModel},System.Collections.Generic.List{Tida.Geometry.External.Util.LineModel})">
+            <summary>
+            查找最小区域
+            </summary>
+            <param name="interiorWalls"></param>
+            <param name="separateInterior"></param>
+            <param name="spatials"></param>
+            <param name="sortOutLines"></param>
+        </member>
+        <member name="M:Tida.Geometry.External.Util.SpatialFinder.MergeSpatialLines(System.Collections.Generic.List{Tida.Geometry.External.Util.LineModel},System.Collections.Generic.List{Tida.Geometry.External.Util.LineModel},System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D}@)">
+            <summary>
+            合并相关墙体
+            </summary>
+            <param name="spatialWalls"></param>
+        </member>
+        <member name="T:Tida.Geometry.External.Util.SpatialModel">
+            <summary>
+            代表一个封闭空间
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.Util.SpatialModel.LineModels">
+            <summary>
+            一个多边形封闭区域的所有线型
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.External.Util.SpatialModel.Id">
+            <summary>
+            当前封闭区域的Id信息
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.External.WeedIndependentAlgorithm">
+            <summary>
+            清除没有任何连接的点
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.External.WeedIndependentAlgorithm.Weed(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            剔除端点无效的点
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.WeedIndependentAlgorithm.WeedLess(System.Collections.Generic.List{Tida.Geometry.Primitives.Line2D})">
+            <summary>
+            获取无法形成封闭区域的线
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.WeedIndependentAlgorithm.Weed(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            剔除无端点的线段
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.External.WeedIndependentAlgorithm.WeedLess(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            剔除端点无效的点
+            </summary>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Arc2D">
+            <summary>
+            几何对象-二维圆弧;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Arc2D.#ctor(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            指定圆弧的中心以构造一个圆弧;
+            </summary>
+            <param name="center"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Arc2D.#ctor">
+            <summary>
+            默认构造方法;
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Arc2D.Center">
+            <summary>
+            圆弧中心;
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Arc2D.Radius">
+            <summary>
+            圆弧的半径;
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Arc2D.StartAngle">
+            <summary>
+            起始角度(弧度);
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Arc2D.Angle">
+            <summary>
+            角度(逆时针计算);
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Ellipse2D">
+            <summary>
+            平面椭圆或圆;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Ellipse2D.Contains(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            判断某点是否在椭圆内部;
+            </summary>
+            <param name="position"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Ellipse2D.RadiusX">
+            <summary>
+            延横轴方向的半径;
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Ellipse2D.RadiusY">
+            <summary>
+            延纵轴方向的半径
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Ellipse2D.Center">
+            <summary>
+            圆心所在位置;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Ellipse2D.GetTopPoint">
+            <summary>
+            获取上顶点;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Ellipse2D.GetBottomPoint">
+            <summary>
+            获取下顶点;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Ellipse2D.GetLeftPoint">
+            <summary>
+            获取左顶点;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Ellipse2D.GetRightPoint">
+            <summary>
+            获取右顶点;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Face.Intersect(Tida.Geometry.Primitives.Face)">
+            <summary>
+            有限面相交获得相交线段集合
+            </summary>
+            <param name="source">与之相交的面</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Face.IntersectUnlimitedFace(Tida.Geometry.Primitives.Face)">
+            <summary>
+            面和面相交获得一条直线
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Face.GetLinesFromIntersectPoints(System.Collections.Generic.List{Tida.Geometry.Primitives.Vector3D},System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            通过直线和多边形交点的奇偶性，获得相交的线段
+            </summary>
+            <param name="intersectPoints"></param>
+            <param name="faceEdges"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Face.IsPointInsideRegion(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            点在多边形的内部
+            </summary>
+            <param name="point"></param>
+            <param name="lines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Face.IsPointInRegionOutLine(Tida.Geometry.Primitives.Vector3D,System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+             <summary>
+            点在多边形的轮廓线上
+             </summary>
+             <param name="point"></param>
+             <param name="lines"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Face.GetPublicLine(Tida.Geometry.Primitives.Line3D,Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            获得两条线段的公共部分
+            </summary>
+            <param name="line1"></param>
+            <param name="line2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Face.Vary">
+            <summary>
+            进行坐标转换
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Freezable">
+            <summary>
+            可冻结单元,可指示是否禁止属性的更改;
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Freezable.IsFrozen">
+            <summary>
+            是否能够被冻结;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Freezable.Freeze">
+            <summary>
+            冻结;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Freezable.SetFreezableProperty``1(``0@,``0,System.String)">
+            <summary>
+            设定可冻结属性,如果处于冻结状态,将抛出一个不可操作异常;
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="member"></param>
+            <param name="propertyName"></param>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.ICloneable`1">
+            <summary>
+            可拷贝契约;
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.ICloneable`1.Clone">
+            <summary>
+            拷贝为指定类型;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line2D.Start">
+            <summary>
+            起点
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line2D.End">
+            <summary>
+            终点
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.#ctor">
+            <summary>
+            构造函数，初始化一个直线
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.#ctor(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            通过两点初始化一个直线
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.Create(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            通过两点创建一个直线
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.Create(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D,System.Double)">
+            <summary>
+            由起点、方向和长度来构造一条直线
+            </summary>
+            <param name="start"></param>
+            <param name="direction"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line2D.Direction">
+            <summary>
+            单位方向向量
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line2D.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.CreateOffset(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            以向量direction来偏移
+            </summary>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.CreateReversed">
+            <summary>
+            创建一个相反方向的线段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.Distance(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            点到线段的最近距离，非垂直距离
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.Evaluate(System.Double)">
+            <summary>
+            直线上某点的坐标
+            </summary>
+            <param name="parameter">比例</param>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line2D.MiddlePoint">
+            <summary>
+            中点
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.IntersectSlow(Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            两条线段的相交点
+            </summary>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.IntersectStraightLineSlow(Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            判断两个直线的相交关系
+            </summary>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.IsAlmostEqualTo(Tida.Geometry.Primitives.Line2D)">
+            <summary>
+            比较两个线段是否相同
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line2D.IsAlmostEqualTo(Tida.Geometry.Primitives.Line2D,System.Double)">
+            <summary>
+            比较两个线段是否相同
+            </summary>
+            <param name="other"></param>
+            <param name="toterance">容差范围</param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Line3D">
+            <summary>
+            初始化当前一个直线
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.#ctor(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            构造函数创建
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line3D.Origin">
+            <summary>
+            返回当前的原点坐标
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.Create(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            通过两个点创建一条直线
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.Create(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D,System.Double)">
+            <summary>
+            通过起点，方向和长度确定一个直线
+            </summary>
+            <param name="start"></param>
+            <param name="direction"></param>
+            <param name="step"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.CreateUnbound(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            创建一个无端点的直线
+            </summary>
+            <param name="origin"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.ClosestParameter(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            
+            </summary>
+            <param name="testPoint"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Tida.Geometry.Primitives.Line3D.direction">
+            <summary>
+            当前直线的方向信息
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line3D.Direction">
+            <summary>
+            直线单位方向
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Line3D.Length">
+            <summary>
+            获取当前线的长度
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.Evaluate(System.Double)">
+            <summary>
+            获取之间指定比例的坐标
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.IntersectSlow(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            线段和线段相交
+            </summary>
+            <param name="curve"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.Intersect(Tida.Geometry.Primitives.Line3D,System.Boolean,System.Double)">
+            <summary>
+            求线段的相交点
+            </summary>
+            <param name="curve">直线</param>
+            <param name="isLineSegment">是否为线段</param>
+            <param name="epsilon">误差值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.IntersectLine(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            线段与线段通过直线与直线的相交方式返回交点
+            </summary>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.IntersectStraightLine(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            射直线和射直线相交
+            </summary>
+            <param name="curve"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.IntersectStraightLine2(Tida.Geometry.Primitives.Line3D)">
+            <summary>
+            直线和线段相交
+            </summary>
+            <param name="limitedCurve">线段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.Clone">
+            <summary>
+            深拷贝
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.OffsetSelf(System.Double,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            将自身平移
+            </summary>
+            <param name="offset"></param>
+            <param name="vdirection"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.OtherEnd(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            <see cref="T:Tida.Geometry.Primitives.Line3D"/> 的另一端点
+            </summary>
+            <param name="currentEnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Line3D.Vary">
+            <summary>
+            对坐标转换进行重写
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Object3D">
+            <summary>
+            用于定义一个三维实体对象
+            </summary>
+        </member>
+        <member name="F:Tida.Geometry.Primitives.Object3D.transform">
+            <summary>
+            当前的转换矩阵
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Object3D.Transform">
+            <summary>
+            当前三维物体的坐标转换类
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Object3D.Vary">
+            <summary>
+            对当前三维物体进行坐标转化
+            </summary>
+            <param name="m4"></param>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon2D.Vertexes">
+            <summary>
+            顶点
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon2D.Area">
+            <summary>
+            面积
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon2D.Centroid">
+            <summary>
+            形心
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon2D.Edges">
+            <summary>
+            轮廓线
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Polygon2D.CreateOffset(System.Double)">
+            <summary>
+            对多边形边进行整体偏移
+            </summary>
+            <param name="offsetDist">正值为向外偏，负值为向内偏</param>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon3D.Vertexes">
+            <summary>
+            顶点
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon3D.Area">
+            <summary>
+            面积
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon3D.Centroid">
+            <summary>
+            形心
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon3D.Edges">
+            <summary>
+            轮廓线
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon3D.Normal">
+            <summary>
+            法向量
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Polygon3D.Matrix">
+            <summary>
+            转换矩阵算法
+            </summary>
+            
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Polygon3D.#ctor(System.Collections.Generic.List{Tida.Geometry.Primitives.Line3D})">
+            <summary>
+            lines集合必须为一个平面内的
+            </summary>
+            <param name="lines"></param>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Rectangle2D.Vertexes">
+            <summary>
+            顶点
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Rectangle2D.Area">
+            <summary>
+            面积
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Rectangle2D.Centroid">
+            <summary>
+            形心
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Rectangle2D.MakeCounterclockwise">
+            <summary>
+            当前当前多边形的线段进行排序
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Rectangle2D2">
+            <summary>
+            矩形重构版;相对<see cref="T:Tida.Geometry.Primitives.Rectangle2D"/>,本类使用的信息更少;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Rectangle2D2.CreateEmpty">
+            <summary>
+            创建一个新的空矩形;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Tida.Geometry.Primitives.Rectangle2D2._middleLine2D">
+            <summary>
+            矩形的两条中线之一;该值不可为空;
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Rectangle2D2.Width">
+            <summary>
+            与<see cref="P:Tida.Geometry.Primitives.Rectangle2D2.MiddleLine2D"/>垂直的一对边的长度;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Rectangle2D2.GetVertexes">
+            <summary>
+            获取所有顶点;延迟返回;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Rectangle2D2.GetLines">
+            <summary>
+            获取所有边;延迟返回;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Rectangle2D2.Center">
+            <summary>
+            中心;
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Size">
+            <summary>
+            用于定义一个尺寸信息类
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Size.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Size.#ctor(System.Double,System.Double)">
+            <summary>
+            构造函数，初始化一个尺寸
+            </summary>
+            <param name="w"></param>
+            <param name="h"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Size.Create(System.Double,System.Double)">
+            <summary>
+            创建一个尺寸
+            </summary>
+            <param name="w"></param>
+            <param name="h"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Size.Width">
+            <summary>
+            尺寸的宽度
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Size.Height">
+            <summary>
+            尺寸的高度
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Vector2D">
+            <summary>
+            当前定义了一个二维向量类
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.#ctor">
+            <summary>
+            初始化二维向量;
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.#ctor(System.Double,System.Double)">
+            <summary>
+            构建一个二维向量
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.Create(System.Double,System.Double)">
+            <summary>
+            创建一个二维向量
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.#ctor(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            通过其他二维向量，构建新的二维向量
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="F:Tida.Geometry.Primitives.Vector2D._zero">
+            <summary>
+            构建0向量
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector2D.BasisX">
+            <summary>
+            构建X轴单位向量
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector2D.BasisY">
+            <summary>
+            构建Y轴单位向量
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.GetFrozenVector2D(Tida.Geometry.Primitives.Vector2D@,System.Double,System.Double)">
+            <summary>
+            返回冻结的向量;
+            </summary>
+            <param name="vector"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.Modulus">
+            <summary>
+            返回当前向量的模
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.Normalize">
+            <summary>
+            归一化
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.Distance(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            两个向量之间的距离
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.Dot(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量的点积
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.Cross(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量的叉积
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.op_UnaryNegation(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量减
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.op_Subtraction(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+             向量减
+            </summary>
+            <param name="v1"></param>
+            <param name="v2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.op_Addition(Tida.Geometry.Primitives.Vector2D,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+             向量加
+            </summary>
+            <param name="v1"></param>
+            <param name="v2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.op_Multiply(Tida.Geometry.Primitives.Vector2D,System.Double)">
+            <summary>
+            向量乘
+            </summary>
+            <param name="v"></param>
+            <param name="k"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.op_Multiply(System.Double,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量乘
+            </summary>
+            <param name="k"></param>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.op_Division(Tida.Geometry.Primitives.Vector2D,System.Double)">
+            <summary>
+            向量除
+            </summary>
+            <param name="v"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.IsAlmostEqualTo(Tida.Geometry.Primitives.Vector2D,System.Double)">
+            <summary>
+            判断两个向量是否相等
+            </summary>
+            <param name="other"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.IsAlmostEqualTo(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            判断两个向量是否相等
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.AngleTo(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量的夹角，值域为[0,π]
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.AngleWith(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量所在直线的夹角，值域为[0,π/2]
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.Offset(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量的偏移
+            </summary>
+            <param name="vector2D"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.MoveTo(System.Double,Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量在指定方向，移动指定距离
+            </summary>
+            <param name="displacement"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector2D.AngleFrom(Tida.Geometry.Primitives.Vector2D)">
+            <summary>
+            向量source逆时针旋转到终点向量的角度，值域为[0 ,2π)
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Vector2DEqualityComparer">
+            <summary>
+            用于比较两个Vector2D是否相同的位置,集合中使用
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Vector3D">
+            <summary>
+            一个空间三维点
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            构造函数，初始化一个三维向量
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="z"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.#ctor(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            构造函数，初始化一个三维向量
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.#ctor">
+            <summary>
+            新建一个零向量
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Create(System.Double,System.Double,System.Double)">
+            <summary>
+            构造器，创建一个三维向量
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="z"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector3D.X">
+            <summary>
+            向量的X
+            </summary>
+            
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector3D.Y">
+            <summary>
+            向量的Y
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector3D.Z">
+            <summary>
+            向量的Z
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector3D.Zero">
+            <summary>
+            原点坐标或者零向量
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector3D.BasisX">
+            <summary>
+            X轴
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector3D.BasisY">
+            <summary>
+            Y轴
+            </summary>
+        </member>
+        <member name="P:Tida.Geometry.Primitives.Vector3D.BasisZ">
+            <summary>
+            Z轴
+            </summary>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.GetFrozenVector3D(Tida.Geometry.Primitives.Vector3D@,System.Double,System.Double,System.Double)">
+            <summary>
+            返回冻结的向量;
+            </summary>
+            <param name="vector"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.ToMatrix">
+            <summary>
+            将向量转成用于坐标转换的列矩阵{x,y,z,1}
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Modulus">
+            <summary>
+             向量的模
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Normalize">
+            <summary>
+            归一化
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Distance(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量到向量之间的距离
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Dot(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量的点积
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Cross(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量的叉积
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Offset(System.Double,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            沿direction方向对其偏移offset的距离
+            </summary>
+            <param name="offset"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.OffsetSelf(System.Double,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            平移自身
+            </summary>
+            <param name="offset"></param>
+            <param name="direction"></param>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.Offset(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            按向量vector进行偏移
+            </summary>
+            <param name="vector">偏移向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.op_UnaryNegation(Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量的减
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.op_Subtraction(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量的减
+            </summary>
+            <param name="v1"></param>
+            <param name="v2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.op_Addition(Tida.Geometry.Primitives.Vector3D,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量的加
+            </summary>
+            <param name="v1"></param>
+            <param name="v2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.op_Multiply(Tida.Geometry.Primitives.Vector3D,System.Double)">
+            <summary>
+            向量的乘
+            </summary>
+            <param name="v"></param>
+            <param name="k"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.op_Multiply(System.Double,Tida.Geometry.Primitives.Vector3D)">
+            <summary>
+            向量的乘
+            </summary>
+            <param name="k"></param>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.op_Division(Tida.Geometry.Primitives.Vector3D,System.Double)">
+            <summary>
+            向量的除
+            </summary>
+            <param name="v"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.ApplyMatrix4(Tida.Geometry.Alternation.Matrix4)">
+            <summary>
+            和矩阵相乘
+            </summary>
+            <param name="m4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tida.Geometry.Primitives.Vector3D.ToVector2D(System.String)">
+            <summary>
+            去掉一个坐标值，变成二维坐标。默认去掉z坐标 
+            </summary>
+            <param name="cutOff"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Vector3DEqualityComparer">
+            <summary>
+            用于比较两个Vector3D是否相同的位置
+            </summary>
+        </member>
+        <member name="T:Tida.Geometry.Primitives.Vector3DXEqualityComparer">
+            <summary>
+            用于比较两个Vector3D的x是否相同的位置
+            </summary>
+        </member>
+    </members>
+</doc>
